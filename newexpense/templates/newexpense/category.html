@@ -1,0 +1,63 @@
+{% extends 'users/base.html' %}
+{% block title %}Category{% endblock %}
+{% block body %}
+<div class="col-md-8 col-md-offset-2">
+    <h2>Category List</h2><br>
+    <form action="/save2/" method="post">
+    {% csrf_token %}
+
+        <b>Category Name</b>
+        <input type="text" id="category_name"  placeholder="Enter category" name="categoryName" />&nbsp;&nbsp;
+
+            <b>Type</b>
+  <select name="typeName" id="typeId">
+      <option value="">Select</option>
+    <option value="income">Income</option>
+    <option value="expense">Expense</option>
+
+  </select>
+<!--
+  &nbsp;&nbsp;<input type="button" onclick="saveCategory()" value="Save" /><br><br><br><br>  -->
+<input type="submit"  value="Save" /><br><br><br><br>
+    </form>
+
+        <div class="">
+   <table class="table">
+       <tr>
+
+    <th>Category Name  </th>
+    <th>Type </th>
+    <th>Action</th>
+
+</tr>
+       {% for category in categoryList %}
+
+  <tr>
+
+      <td>{{ category.categoryName }}</td>
+    <td>{{ category.typeName }}</td>
+
+     <td>
+         <form action="/deleteCategory/" method="post" id="deleteForm">{% csrf_token %}
+         &nbsp;&nbsp; <a href="javascript:deleteCategory()">Delete</a>
+             <input type="hidden"   name="categoryId"  value="{{ category.id }}" />
+             </form>
+     </td>
+
+  </tr>
+       {% endfor %}
+
+</table>
+    </div>
+
+</div>
+<script>
+    function deleteCategory() {
+
+   document.getElementById("deleteForm").submit();
+}
+</script>
+{% endblock %}
+
+
+

@@ -1,0 +1,10 @@
+{% extends 'users/base.html' %}
+{% block title %}Logout{% endblock %}
+{% block body %}
+<div class="col-md-8 col-md-offset-3">
+<h1>You have been logged out</h1>
+    <p>log in again
+<a href="{% url 'login' %}"><span class="glyphicon " aria-hidden="true"></span>&nbsp; Login</a></li>
+</p>
+</div>
+{% endblock %}

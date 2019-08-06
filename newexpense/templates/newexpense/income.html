@@ -1,0 +1,61 @@
+{% extends 'users/base.html' %}
+{% block title %}Income{% endblock %}
+
+{% block body %}
+<div class="col-md-8 col-md-offset-2">
+    <div>
+
+        <button type="submit" class="btn btn-default" style="float: right;"> <a href="/home/?type=income">Add more</a></button><br><br>
+    </div>
+
+<div class="">
+    <table class="table">
+        <tr>
+
+            <th>Type</th>
+            <th>Category Name</th>
+            <th>Amount</th>
+            <th>Description</th>
+            <th>Date</th>
+            <th>Action</th>
+
+        </tr>
+        {% for income in incomeList %}
+
+        <tr>
+
+            <td>{{ income.type }}</td>
+            <td>{{ income.category }}</td>
+            <td>{{ income.amount }}</td>
+            <td>{{ income.description }}</td>
+            <td>{{ income.date_created }}</td>
+
+
+            <td>
+                <form action="/deleteIncome/" method="post" id="deleteIncome">{% csrf_token %}
+                    <a href="{% url 'income_edit' income.id %}">Edit</a> &nbsp;&nbsp; <a href="javascript:deleteCategory()">Delete</a>
+                    <input type="hidden" name="incomeId" value="{{ income.id }}"/>
+                </form>
+            </td>
+
+        </tr>
+        {% endfor %}
+
+    </table>
+</div>
+</div>
+</div>
+<script>
+    function deleteCategory() {
+
+   document.getElementById("deleteIncome").submit();
+}
+
+</script>
+<script>
+
+
+
+</script>
+
+{% endblock %}
